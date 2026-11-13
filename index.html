@@ -1,0 +1,43 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Charla · Platica con personajes de IA</title><meta name="description" content="Platica con personajes de IA que te hablan, te recuerdan y te motivan. Crea los tuyos y compártelos.">
+<meta name="theme-color" content="#0b0b12"><link rel="stylesheet" href="styles.css"></head><body>
+<header class="top"><a class="logo" href="#">💬 <b>Charla</b></a><div class="acc"><button id="bAjustes" class="ic" title="Ajustes">⚙️</button></div></header>
+<main id="vInicio">
+  <section class="hero"><h1>Platica con quien quieras.<br><span>Te habla, te recuerda, te impulsa.</span></h1>
+  <p>Raperos, cantantes, coaches, abuelitas sabias, figuras de la historia y los que tú inventes. Todos son personajes de IA.</p>
+  <div class="buscar"><input id="q" placeholder="Busca un personaje…" autocomplete="off"><button id="bCrear" class="btn">＋ Crear</button></div>
+  <div id="cats" class="cats"></div></section>
+  <section id="recientes" class="fila oculto"><h2>Sigue platicando</h2><div id="lRec" class="rec"></div></section>
+  <section><h2 id="tLista">Descubre</h2><div id="lista" class="grid"></div></section>
+  <footer class="pie">Charla es un servicio de entretenimiento con personajes creados por IA. Ninguno es una persona real; los personajes de fans no representan a la persona en la que se inspiran. Las respuestas pueden equivocarse. Si estás en peligro llama al 911 o a la Línea de la Vida 800 911 2000.</footer>
+</main>
+<main id="vChat" class="oculto">
+  <div class="cbar"><button id="bAtras" class="ic">←</button><div id="cAv" class="av"></div><div class="ct"><b id="cNom"></b><small id="cSub">personaje de IA</small></div>
+  <button id="bVoz" class="ic" title="Voz">🔊</button><button id="bCompartir" class="ic" title="Compartir">🔗</button><button id="bMas" class="ic" title="Más">⋯</button></div>
+  <div id="fan" class="fan oculto">Personaje hecho por fans. No es la persona real.</div>
+  <div id="msgs" class="msgs"></div>
+  <form id="fChat" class="entrada"><button type="button" id="bMic" class="ic" title="Hablar">🎙️</button><input id="txt" placeholder="Escribe un mensaje…" autocomplete="off"><button class="btn">➤</button></form>
+</main>
+<div id="mCrear" class="modal oculto"><div class="caja"><h3>Crea tu personaje</h3>
+  <label>Nombre<input id="crNom" maxlength="40"></label>
+  <label>Emoji o avatar<input id="crEmo" maxlength="4" value="✨"></label>
+  <label>Categoría<select id="crCat"></select></label>
+  <label>Descripción corta<input id="crDesc" maxlength="120" placeholder="Qué es y de qué platica"></label>
+  <label>Personalidad e historia<textarea id="crPerso" rows="5" maxlength="1500" placeholder="Cómo habla, su historia, qué le gusta, cómo trata al usuario"></textarea></label>
+  <label>Primer mensaje<input id="crSal" maxlength="200"></label>
+  <label class="fila2"><span>Voz: tono <input id="crTono" type="range" min="0.5" max="1.6" step="0.05" value="1"></span><span>velocidad <input id="crVel" type="range" min="0.7" max="1.4" step="0.05" value="1"></span></label>
+  <label class="chk"><input id="crFan" type="checkbox"> Está inspirado en una persona real (se marca como personaje de fan)</label>
+  <p id="crErr" class="err"></p>
+  <div class="bots"><button id="crProbar" class="btn sec" type="button">🔊 Probar voz</button><button id="crCancel" class="btn sec" type="button">Cancelar</button><button id="crOk" class="btn" type="button">Crear y platicar</button></div></div></div>
+<div id="mAjustes" class="modal oculto"><div class="caja"><h3>Ajustes</h3>
+  <label>Tu nombre (para que te llamen así)<input id="ajNom" maxlength="30"></label>
+  <label>Clave de Groq (opcional, gratis en console.groq.com)<input id="ajKey" type="password" autocomplete="off" placeholder="gsk_…"></label>
+  <label class="chk"><input id="ajVoz" type="checkbox"> Leer en voz alta las respuestas</label>
+  <p class="nota" id="ajCont"></p>
+  <div class="bots"><button id="ajBorrar" class="btn sec peligro" type="button">Borrar mis chats</button><button id="ajOk" class="btn" type="button">Listo</button></div></div></div>
+<div id="mMas" class="modal oculto"><div class="caja"><h3 id="mmTit">Opciones</h3>
+  <div class="bots col"><button id="mmReset" class="btn sec" type="button">Empezar plática de nuevo</button><button id="mmBorrarP" class="btn sec peligro oculto" type="button">Borrar este personaje</button><button id="mmCerrar" class="btn" type="button">Cerrar</button></div></div></div>
+<div id="mPago" class="modal oculto"><div class="caja"><h3>Se acabaron los mensajes gratis de hoy</h3><p>Mañana se recargan. Si quieres platicar sin límite, pásate a Charla Plus.</p>
+  <div class="bots col"><a id="pgLink" class="btn" target="_blank" rel="noopener">Quiero Charla Plus</a><button id="pgCerrar" class="btn sec" type="button">Ahorita no</button></div></div></div>
+<div id="toast" class="toast oculto"></div>
+<script src="config.js"></script><script src="personajes.js"></script><script src="app.js"></script></body></html>
