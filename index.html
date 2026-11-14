@@ -1,30 +1,36 @@
 <!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Charla · Platica con personajes de IA</title><meta name="description" content="Platica con personajes de IA que te hablan, te recuerdan y te motivan. Crea los tuyos y compártelos.">
+<title>Charla · Platica con personajes de IA</title><meta name="description" content="Platica con Goku, Jack Sparrow, Homero y personajes que tú inventes. Te contestan, te recuerdan y te hablan con voz. Gratis.">
+<meta property="og:title" content="Charla · Platica con quien quieras"><meta property="og:description" content="Personajes con IA que te contestan, te recuerdan y te hablan con voz. Gratis."><meta property="og:image" content="img/icon.png">
 <meta name="theme-color" content="#0b0b12"><link rel="icon" href="img/icon.png"><link rel="apple-touch-icon" href="img/icon-180.png"><link rel="manifest" href="manifest.json"><link rel="stylesheet" href="styles.css"></head><body>
-<header class="top"><a class="logo" href="#"><img src="img/icon.png" alt=""> <b>Charla</b></a><div class="acc"><span id="racha" class="racha oculto"></span><span id="plusTag" class="plus oculto">PLUS</span><button id="bAjustes" class="ic" title="Ajustes">⚙️</button></div></header>
+<header class="top"><a class="logo" href="#"><img src="img/icon.png" alt=""> <b>Charla</b></a><div class="acc"><span id="racha" class="racha oculto"></span><span id="plusTag" class="plus oculto">PLUS</span><button id="bEntrarTop" class="btn sec mini oculto" type="button">Entrar</button><button id="bAjustes" class="ic" title="Ajustes" aria-label="Ajustes">⚙️</button></div></header>
 <main id="vInicio">
-  <section class="hero"><h1>Platica con quien quieras.<br><span>Te habla, te recuerda, te impulsa.</span></h1>
-  <p>Goku, Jack Sparrow, Homero, Gojo, el Chapulín y los que tú inventes. Si no está, lo creas en 10 segundos. Todos son personajes de IA hechos por fans.</p>
-  <div class="buscar"><input id="q" placeholder="Busca un personaje…" autocomplete="off"><button id="bCrear" class="btn">＋ Crear</button></div>
+  <section class="hero"><h1>Platica con quien quieras.<br><span>Te contestan, te recuerdan y te hablan con voz.</span></h1>
+  <p>Goku, Jack Sparrow, Homero, Gojo, el Chapulín, La Llorona y los que tú inventes. Toca uno y empieza: tus primeros mensajes son sin registro.</p>
+  <div class="pasos"><div><b>1</b>Escoge o crea un personaje</div><div><b>2</b>Platica por texto, voz o llamada</div><div><b>3</b>Se acuerda de ti la próxima vez</div></div>
+  <div class="buscar"><input id="q" placeholder="Busca un personaje…" autocomplete="off" aria-label="Buscar personaje"><button id="bCrear" class="btn" type="button">＋ Crear</button><button id="bGrupo" class="btn sec" type="button" title="Chat grupal">👥</button></div>
   <div id="cats" class="cats"></div></section>
   <section id="recientes" class="fila oculto"><h2>Sigue platicando</h2><div id="lRec" class="rec"></div></section>
   <section><h2 id="tLista">Descubre</h2><div id="lista" class="grid"></div></section>
-  <section id="planes" class="planes"><h2>Charla. Platica con personajes que te entienden.</h2><p class="sub">Crea el tuyo o escoge uno. Entras con tu correo y listo.</p>
-  <div class="pl"><div class="plan"><h3>Gratis <b>$0</b></h3><ul><li>30 mensajes al día</li><li>Crea hasta 10 personajes</li><li>Voz básica</li><li>Racha diaria</li></ul><a href="#" class="btn sec">Empezar gratis</a></div>
-  <div class="plan top"><h3>Plus</h3><ul><li>Mensajes ilimitados</li><li>El modelo más listo, que contesta más largo y se acuerda de ti</li><li>Modo romance para mayores de 18, coqueto y sin contenido sexual</li><li>Hasta 50 personajes</li><li>Voz personalizada (próximamente)</li></ul><a class="btn plusLink" target="_blank" rel="noopener">Quiero Plus</a></div></div>
-  <p class="nota">El uso de la IA corre por tu cuenta de Puter, que trae saldo gratis. Plus desbloquea funciones, pero no cubre ese saldo.</p></section>
-  <footer class="pie">Charla es un servicio de entretenimiento con personajes creados por IA. Ninguno es una persona real; los personajes de fans no representan a la persona en la que se inspiran. Las respuestas pueden equivocarse. Si estás en peligro llama al 911 o a la Línea de la Vida 800 911 2000.</footer>
+  <section id="planes" class="planes"><h2>Charla. Platica con personajes que te entienden.</h2><p class="sub">Pruébalo sin registro. Para seguir, entras con tu correo y listo.</p>
+  <div class="pl"><div class="plan"><h3>Gratis <b>$0</b></h3><ul><li>30 mensajes al día</li><li>Crea hasta 10 personajes</li><li>Voz y modo llamada</li><li>Chats grupales</li></ul><a href="#" class="btn sec">Empezar gratis</a></div>
+  <div class="plan top"><h3>Plus <b class="precioPlus"></b></h3><ul><li>Mensajes ilimitados</li><li>El modelo más listo, que contesta más largo y se acuerda mejor de ti</li><li>Modo romance para mayores de 18, coqueto y sin contenido sexual</li><li>Hasta 50 personajes</li></ul><a class="btn plusLink" target="_blank" rel="noopener">Quiero Plus</a><p class="nota">Nos escribes por WhatsApp, pagas y te mandamos tu código para activarlo en Ajustes.</p></div></div>
+  <p class="nota">La IA corre con tu cuenta gratis de Puter, que trae saldo incluido. Plus desbloquea funciones; no es un segundo cobro de IA.</p></section>
+  <footer class="pie">Charla es entretenimiento con personajes creados por IA. Ninguno es una persona real ni un personaje oficial. Las respuestas pueden equivocarse. Tus chats se guardan solo en tu teléfono; nosotros no los vemos.<br>Si estás en peligro llama al 911 o a la Línea de la Vida 800 911 2000.<br><a href="privacidad.html">Aviso de privacidad y términos</a> · <a id="lnkReporte" target="_blank" rel="noopener">Reportar o pedir que bajemos algo</a></footer>
 </main>
 <main id="vChat" class="oculto">
-  <div class="cbar"><button id="bAtras" class="ic">←</button><div id="cAv" class="av"></div><div class="ct"><b id="cNom"></b><small id="cSub">personaje de IA</small></div>
-  <button id="bVoz" class="ic" title="Voz">🔊</button><button id="bCompartir" class="ic" title="Compartir">🔗</button><button id="bMas" class="ic" title="Más">⋯</button></div>
+  <div class="cbar"><button id="bAtras" class="ic" aria-label="Atrás">←</button><div id="cAv" class="av"></div><div class="ct"><b id="cNom"></b><small id="cSub">personaje de IA</small></div>
+  <button id="bFav" class="ic" title="Favorito">☆</button><button id="bLlamar" class="ic" title="Llamada por voz">📞</button><button id="bVoz" class="ic" title="Leer en voz alta">🔊</button><button id="bCompartir" class="ic" title="Compartir">🔗</button><button id="bMas" class="ic" title="Más">⋯</button></div>
   <div id="fan" class="fan oculto">Personaje hecho por fans con IA. No es oficial ni es la persona real.</div>
   <div id="msgs" class="msgs"></div>
-  <form id="fChat" class="entrada"><button type="button" id="bMic" class="ic" title="Hablar">🎙️</button><input id="txt" placeholder="Escribe un mensaje…" autocomplete="off"><button class="btn">➤</button></form>
+  <div id="chips" class="chips"></div>
+  <form id="fChat" class="entrada"><button type="button" id="bMic" class="ic" title="Dictar">🎙️</button><input id="txt" placeholder="Escribe un mensaje…" autocomplete="off" aria-label="Mensaje"><button class="btn" aria-label="Enviar">➤</button></form>
 </main>
-<div id="mCrear" class="modal oculto"><div class="caja"><h3>Crea tu personaje</h3>
+<div id="llamada" class="llamada oculto"><div id="llAv" class="av"></div><b id="llNom"></b><span id="llEstado">Te escucho…</span><button id="llColgar" class="btn peligroso" type="button">Colgar</button></div>
+<div id="mCrear" class="modal oculto"><div class="caja"><h3 id="crTit">Crea tu personaje</h3>
   <label>Nombre<input id="crNom" maxlength="40"></label>
-  <label>Emoji o avatar<input id="crEmo" maxlength="4" value="✨"></label>
+  <label>Emoji<input id="crEmo" maxlength="4" value="✨"></label>
+  <label>Imagen (opcional)<input id="crFoto" type="file" accept="image/*"></label><div class="prevf"><div id="crPrev"></div><button id="crQuitarFoto" class="btn sec mini" type="button">Quitar imagen</button></div>
+  <label class="chk"><input id="crFotoOk" type="checkbox"> La imagen es un dibujo o imagen de IA, no la foto de una persona real.</label>
   <label>Categoría<select id="crCat"></select></label>
   <label>Descripción corta<input id="crDesc" maxlength="120" placeholder="Qué es y de qué platica"></label>
   <label>Personalidad e historia<textarea id="crPerso" rows="5" maxlength="1500" placeholder="Cómo habla, su historia, qué le gusta, cómo trata al usuario"></textarea></label>
@@ -33,19 +39,31 @@
   <label class="chk"><input id="crFan" type="checkbox"> Está inspirado en una persona real (se marca como personaje de fan)</label>
   <p id="crErr" class="err"></p>
   <div class="bots"><button id="crProbar" class="btn sec" type="button">🔊 Probar voz</button><button id="crCancel" class="btn sec" type="button">Cancelar</button><button id="crOk" class="btn" type="button">Crear y platicar</button></div></div></div>
+<div id="mGrupo" class="modal oculto"><div class="caja"><h3>Chat grupal</h3><p class="nota">Escoge 2 o 3 personajes y platican todos contigo.</p>
+  <label>Nombre del grupo (opcional)<input id="grNom" maxlength="40"></label><div id="grLista" class="grlista"></div><p id="grErr" class="err"></p>
+  <div class="bots"><button id="grCancel" class="btn sec" type="button">Cancelar</button><button id="grOk" class="btn" type="button">Crear grupo</button></div></div></div>
 <div id="mAjustes" class="modal oculto"><div class="caja"><h3>Ajustes</h3>
   <label>Tu nombre (para que te llamen así)<input id="ajNom" maxlength="30"></label>
   <div class="cuenta"><span id="ajCuenta">Sin cuenta</span><button id="ajEntrar" class="btn sec" type="button">Entrar con tu correo</button></div>
   <label>Código de Charla Plus<span class="fila3"><input id="ajCod" placeholder="CH-XXXXXX-XXXX" autocomplete="off"><button id="ajActivar" class="btn sec" type="button">Activar</button></span></label>
-  <label class="chk" id="ajRomWrap"><input id="ajRom" type="checkbox"> Modo romance (solo Plus): soy mayor de 18 y acepto que los personajes coqueteen. Nunca es contenido sexual.</label>
-  <details><summary class="nota">Avanzado</summary><label>Clave propia de Groq (opcional)<input id="ajKey" type="password" autocomplete="off" placeholder="gsk_…"></label></details>
+  <label class="chk" id="ajRomWrap"><input id="ajRom" type="checkbox"> Modo romance (solo Plus y mayores de 18): los personajes pueden coquetear. Nunca es contenido sexual.</label>
+  <label class="chk"><input id="ajFam" type="checkbox"> Modo familiar con PIN (para niños: sin romance y lenguaje limpio)</label>
+  <label>Largo de las respuestas<select id="ajLargo"><option value="corto">Cortas</option><option value="normal">Normales</option><option value="largo">Largas</option></select></label>
   <label class="chk"><input id="ajVoz" type="checkbox"> Leer en voz alta las respuestas</label>
+  <label>Velocidad de la voz<input id="ajVel" type="range" min="0.7" max="1.4" step="0.05" value="1"></label>
+  <label class="chk"><input id="ajLetra" type="checkbox"> Letra grande</label>
+  <label class="chk"><input id="ajClaro" type="checkbox"> Alto contraste</label>
+  <div class="bots izq"><button id="ajGuard" class="btn sec" type="button">⭐ Frases guardadas (<span id="ajGuardN">0</span>)</button><button id="ajExport" class="btn sec" type="button">Guardar respaldo</button><button id="ajImport" class="btn sec" type="button">Cargar respaldo</button><input id="ajImportF" type="file" accept=".json,application/json" class="oculto"></div>
+  <details><summary class="nota">Avanzado</summary><label>Clave propia de Groq (opcional)<input id="ajKey" type="password" autocomplete="off" placeholder="gsk_…"></label></details>
   <p class="nota" id="ajCont"></p>
   <div class="bots"><button id="ajBorrar" class="btn sec peligro" type="button">Borrar mis chats</button><button id="ajOk" class="btn" type="button">Listo</button></div></div></div>
+<div id="mGuard" class="modal oculto"><div class="caja"><h3>Frases guardadas</h3><div id="guLista"></div><div class="bots"><button id="guCerrar" class="btn" type="button">Cerrar</button></div></div></div>
 <div id="mMas" class="modal oculto"><div class="caja"><h3 id="mmTit">Opciones</h3>
-  <div class="bots col"><button id="mmReset" class="btn sec" type="button">Empezar plática de nuevo</button><button id="mmBorrarP" class="btn sec peligro oculto" type="button">Borrar este personaje</button><button id="mmCerrar" class="btn" type="button">Cerrar</button></div></div></div>
-<div id="mEntrar" class="modal oculto"><div class="caja"><h3>Entra con tu correo para platicar</h3><p>Charla usa Puter para darte la IA. Creas tu cuenta gratis con tu correo una sola vez y tus personajes ya te contestan.</p><div class="bots col"><button id="enOk" class="btn" type="button">Entrar con mi correo</button><button id="enNo" class="btn sec" type="button">Ahorita no</button></div></div></div>
-<div id="mPago" class="modal oculto"><div class="caja"><h3>Se acabaron los mensajes gratis de hoy</h3><p>Mañana se recargan. Con Charla Plus tienes mensajes ilimitados, una IA más lista que se acuerda mejor de ti, y el modo romance para mayores de 18.</p><p class="nota">El uso de la IA corre por tu cuenta de Puter, que incluye saldo gratis; el modelo de Plus gasta ese saldo más rápido.</p>
+  <label>Lo que recuerda de ti (puedes corregirlo)<textarea id="mmMem" rows="3" maxlength="800" placeholder="Todavía no recuerda nada; platica un poco más."></textarea></label>
+  <div class="bots"><button id="mmMemOk" class="btn sec mini" type="button">Guardar recuerdo</button></div>
+  <div class="bots col"><button id="mmEditar" class="btn sec oculto" type="button">Editar personaje</button><button id="mmReset" class="btn sec" type="button">Empezar plática de nuevo</button><button id="mmReportar" class="btn sec" type="button">¿Dice algo que no debe? Repórtalo</button><button id="mmBorrarP" class="btn sec peligro oculto" type="button">Borrar este personaje</button><button id="mmCerrar" class="btn" type="button">Cerrar</button></div></div></div>
+<div id="mEntrar" class="modal oculto"><div class="caja"><h3>Para seguir platicando, entra con tu correo</h3><p>Ya usaste tus mensajes de prueba. Charla usa <b>Puter</b> para darte la IA: es gratis y te da saldo de IA, así tus personajes te siguen contestando.</p><p class="nota">La ventana sale en inglés: nomás pon tu correo (o "Continue with Google") y le das "Continue". Tus chats no los vemos nosotros; se quedan en tu teléfono.</p><div class="bots col"><button id="enOk" class="btn" type="button">Entrar con mi correo</button><button id="enNo" class="btn sec" type="button">Ahorita no</button></div></div></div>
+<div id="mPago" class="modal oculto"><div class="caja"><h3>Se acabaron los mensajes gratis de hoy</h3><p>Mañana se recargan. Con Charla Plus (<span class="precioPlus"></span>) tienes mensajes ilimitados, una IA más lista que se acuerda mejor de ti, y el modo romance para mayores de 18.</p><p class="nota">Nos escribes por WhatsApp, pagas y te mandamos tu código al momento. Lo pegas en Ajustes y listo.</p>
   <div class="bots col"><a id="pgLink" class="btn" target="_blank" rel="noopener">Quiero Charla Plus</a><button id="pgCerrar" class="btn sec" type="button">Ahorita no</button></div></div></div>
-<div id="toast" class="toast oculto"></div>
+<div id="toast" class="toast oculto" role="status"></div>
 <script src="https://js.puter.com/v2/"></script><script src="config.js"></script><script src="personajes.js"></script><script src="app.js"></script></body></html>
