@@ -67,3 +67,4 @@ body.grande{font-size:19px}body.grande .m{font-size:19px}body.grande .card p{fon
 body.claro{background:#000;color:#fff}body.claro .m.ia{background:#000;border:2px solid #fff}body.claro .m.yo{background:#4c1d95;border:2px solid #fff}body.claro .card p,body.claro .nota,body.claro .hero p,body.claro .pie{color:#fff}body.claro input,body.claro textarea,body.claro select{background:#000;border:2px solid #fff}
 .cbar{gap:6px}.cbar .ic{min-width:36px;height:36px;font-size:16px;padding:0}.ct b,.ct small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#bFav{color:#fbbf24}
 @media(max-width:420px){.cbar .ic{min-width:32px;font-size:15px}.cbar .av{width:38px;height:38px}}
+.plantillas{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}.plantillas small{width:100%}.plantillas button{background:#ffffff10;border:1px solid #ffffff1f;color:inherit;border-radius:999px;padding:5px 10px;font:inherit;font-size:13px;cursor:pointer}#bLetra{font-weight:800;font-size:15px}

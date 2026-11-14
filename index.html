@@ -2,10 +2,10 @@
 <title>Charla · Platica con personajes de IA</title><meta name="description" content="Platica con Goku, Jack Sparrow, Homero y personajes que tú inventes. Te contestan, te recuerdan y te hablan con voz. Gratis.">
 <meta property="og:title" content="Charla · Platica con quien quieras"><meta property="og:description" content="Personajes con IA que te contestan, te recuerdan y te hablan con voz. Gratis."><meta property="og:image" content="img/icon.png">
 <meta name="theme-color" content="#0b0b12"><link rel="icon" href="img/icon.png"><link rel="apple-touch-icon" href="img/icon-180.png"><link rel="manifest" href="manifest.json"><link rel="stylesheet" href="styles.css"></head><body>
-<header class="top"><a class="logo" href="#"><img src="img/icon.png" alt=""> <b>Charla</b></a><div class="acc"><span id="racha" class="racha oculto"></span><span id="plusTag" class="plus oculto">PLUS</span><button id="bEntrarTop" class="btn sec mini oculto" type="button">Entrar</button><button id="bAjustes" class="ic" title="Ajustes" aria-label="Ajustes">⚙️</button></div></header>
+<header class="top"><a class="logo" href="#"><img src="img/icon.png" alt=""> <b>Charla</b></a><div class="acc"><span id="racha" class="racha oculto"></span><span id="plusTag" class="plus oculto">PLUS</span><button id="bEntrarTop" class="btn sec mini oculto" type="button">Entrar</button><button id="bLetra" class="ic" title="Letra grande" aria-label="Letra grande">Aa</button><button id="bAjustes" class="ic" title="Ajustes" aria-label="Ajustes">⚙️</button></div></header>
 <main id="vInicio">
   <section class="hero"><h1>Platica con quien quieras.<br><span>Te contestan, te recuerdan y te hablan con voz.</span></h1>
-  <p>Goku, Jack Sparrow, Homero, Gojo, el Chapulín, La Llorona y los que tú inventes. Toca uno y empieza: tus primeros mensajes son sin registro.</p>
+  <p>Goku, Jack Sparrow, Homero, Gojo, el Chapulín, La Llorona y los que tú inventes. Toca uno y empieza: tus primeros 5 mensajes son sin registro; después entras gratis con tu correo y sigues con 30 al día.</p>
   <div class="pasos"><div><b>1</b>Escoge o crea un personaje</div><div><b>2</b>Platica por texto, voz o llamada</div><div><b>3</b>Se acuerda de ti la próxima vez</div></div>
   <div class="buscar"><input id="q" placeholder="Busca un personaje…" autocomplete="off" aria-label="Buscar personaje"><button id="bCrear" class="btn" type="button">＋ Crear</button><button id="bGrupo" class="btn sec" type="button" title="Chat grupal">👥</button></div>
   <div id="cats" class="cats"></div></section>
@@ -27,6 +27,7 @@
 </main>
 <div id="llamada" class="llamada oculto"><div id="llAv" class="av"></div><b id="llNom"></b><span id="llEstado">Te escucho…</span><button id="llColgar" class="btn peligroso" type="button">Colgar</button></div>
 <div id="mCrear" class="modal oculto"><div class="caja"><h3 id="crTit">Crea tu personaje</h3>
+  <div class="plantillas" id="crPlant"></div>
   <label>Nombre<input id="crNom" maxlength="40"></label>
   <label>Emoji<input id="crEmo" maxlength="4" value="✨"></label>
   <label>Imagen (opcional)<input id="crFoto" type="file" accept="image/*"></label><div class="prevf"><div id="crPrev"></div><button id="crQuitarFoto" class="btn sec mini" type="button">Quitar imagen</button></div>
@@ -39,7 +40,7 @@
   <label class="chk"><input id="crFan" type="checkbox"> Está inspirado en una persona real (se marca como personaje de fan)</label>
   <p id="crErr" class="err"></p>
   <div class="bots"><button id="crProbar" class="btn sec" type="button">🔊 Probar voz</button><button id="crCancel" class="btn sec" type="button">Cancelar</button><button id="crOk" class="btn" type="button">Crear y platicar</button></div></div></div>
-<div id="mGrupo" class="modal oculto"><div class="caja"><h3>Chat grupal</h3><p class="nota">Escoge 2 o 3 personajes y platican todos contigo.</p>
+<div id="mGrupo" class="modal oculto"><div class="caja"><h3>Chat grupal</h3><p class="nota">Escoge 2 o 3 personajes. Cada vez que escribes, te contesta cada uno una sola vez; nunca se ponen a hablar solos.</p>
   <label>Nombre del grupo (opcional)<input id="grNom" maxlength="40"></label><div id="grLista" class="grlista"></div><p id="grErr" class="err"></p>
   <div class="bots"><button id="grCancel" class="btn sec" type="button">Cancelar</button><button id="grOk" class="btn" type="button">Crear grupo</button></div></div></div>
 <div id="mAjustes" class="modal oculto"><div class="caja"><h3>Ajustes</h3>

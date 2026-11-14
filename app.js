@@ -211,18 +211,18 @@ $("#bFav").onclick = () => { const f = favs(), i = f.indexOf(actual.id); i < 0 ?
 
 // ---------- tarjeta para compartir ----------
 async function tarjeta(p, texto) {
-  const cv = document.createElement("canvas"); cv.width = 1080; cv.height = 1350; const x = cv.getContext("2d");
-  const g = x.createLinearGradient(0, 0, 1080, 1350); g.addColorStop(0, p.colores[0]); g.addColorStop(1, p.colores[1]); x.fillStyle = g; x.fillRect(0, 0, 1080, 1350);
-  x.fillStyle = "#0008"; x.fillRect(0, 0, 1080, 1350);
+  const cv = document.createElement("canvas"); cv.width = 1080; cv.height = 1920; const x = cv.getContext("2d");
+  const g = x.createLinearGradient(0, 0, 1080, 1350); g.addColorStop(0, p.colores[0]); g.addColorStop(1, p.colores[1]); x.fillStyle = g; x.fillRect(0, 0, 1080, 1920);
+  x.fillStyle = "#0008"; x.fillRect(0, 0, 1080, 1920);
   const f = fotoDe(p);
-  if (f) { try { const im = new Image(); im.src = f; await im.decode(); x.save(); x.beginPath(); x.arc(540, 250, 140, 0, 7); x.clip(); x.drawImage(im, 400, 110, 280, 280 * im.height / im.width); x.restore(); } catch {} }
-  else { x.font = "180px serif"; x.textAlign = "center"; x.fillText(p.emoji, 540, 320); }
-  x.textAlign = "center"; x.fillStyle = "#fff"; x.font = "bold 64px system-ui,sans-serif"; x.fillText(p.nombre, 540, 470);
-  x.font = "46px system-ui,sans-serif"; const pal = ("“" + texto.slice(0, 380) + "”").split(" "); let lin = "", y = 590, lineas = [];
+  if (f) { try { const im = new Image(); im.src = f; await im.decode(); x.save(); x.beginPath(); x.arc(540, 520, 160, 0, 7); x.clip(); x.drawImage(im, 380, 360, 320, 320 * im.height / im.width); x.restore(); } catch {} }
+  else { x.font = "180px serif"; x.textAlign = "center"; x.fillText(p.emoji, 540, 600); }
+  x.textAlign = "center"; x.fillStyle = "#fff"; x.font = "bold 64px system-ui,sans-serif"; x.fillText(p.nombre, 540, 790);
+  x.font = "46px system-ui,sans-serif"; const pal = ("“" + texto.slice(0, 380) + "”").split(" "); let lin = "", y = 900, lineas = [];
   for (const w of pal) { if (x.measureText(lin + w).width > 900) { lineas.push(lin); lin = ""; } lin += w + " "; } lineas.push(lin);
-  lineas.slice(0, 11).forEach(l => { x.fillText(l.trim(), 540, y); y += 62; });
-  x.font = "bold 40px system-ui,sans-serif"; x.fillStyle = "#fbbf24"; x.fillText("Platica gratis en Charla", 540, 1250);
-  x.font = "30px system-ui,sans-serif"; x.fillStyle = "#ffffffaa"; x.fillText(location.host + location.pathname.replace(/index\.html$/, ""), 540, 1300);
+  lineas.slice(0, 12).forEach(l => { x.fillText(l.trim(), 540, y); y += 62; });
+  x.font = "bold 40px system-ui,sans-serif"; x.fillStyle = "#fbbf24"; x.fillText("Platica gratis en Charla", 540, 1600);
+  x.font = "30px system-ui,sans-serif"; x.fillStyle = "#ffffffaa"; x.fillText(location.host + location.pathname.replace(/index\.html$/, ""), 540, 1655);
   cv.toBlob(async b => {
     const file = new File([b], "charla-" + p.id + ".png", { type: "image/png" });
     try { if (navigator.canShare?.({ files: [file] })) return await navigator.share({ files: [file], text: "Mira lo que me dijo " + p.nombre + " en Charla " + location.href.split("#")[0] + "#p=" + p.id }); } catch { return; }
@@ -306,13 +306,17 @@ const COLORES = [["#8b5cf6", "#1e1b4b"], ["#ec4899", "#4c0519"], ["#22c55e", "#0
 $("#crCat").innerHTML = CH_CATS.slice(1).map(c => `<option>${c}</option>`).join("");
 function abrirCrear(nombre = "", p = null) {
   editando = p; fotoNueva = p?.foto || null;
-  $("#crTit").textContent = p ? "Editar personaje" : "Crea tu personaje"; $("#crOk").textContent = p ? "Guardar cambios" : "Crear y platicar";
+  $("#crPlant").classList.toggle("oculto", !!p); $("#crTit").textContent = p ? "Editar personaje" : "Crea tu personaje"; $("#crOk").textContent = p ? "Guardar cambios" : "Crear y platicar";
   $("#crNom").value = p?.nombre || nombre; $("#crEmo").value = p?.emoji || "✨"; $("#crCat").value = p?.cat || "Amigos"; $("#crDesc").value = p?.desc || "";
   $("#crPerso").value = p ? p.perso.replace(new RegExp("^Eres " + p.nombre.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\. "), "") : ""; $("#crSal").value = p?.saludo || "";
   $("#crTono").value = p?.voz?.tono ?? 1; $("#crVel").value = p?.voz?.vel ?? 1; $("#crFan").checked = !!p?.fan; $("#crFoto").value = ""; $("#crFotoOk").checked = false;
   $("#crPrev").innerHTML = fotoNueva ? `<img src="${fotoNueva}" alt="">` : ""; $("#crErr").textContent = ""; abrir("#mCrear"); $("#crNom").focus();
 }
 $("#bCrear").onclick = () => abrirCrear();
+const PLANT = [["🧙 Mago sabio","Mago Aurelio","🧙","Aventura","Un mago anciano y sabio que guía al usuario en aventuras de fantasía con acertijos y decisiones."],["💼 Mentor de negocios","Don Ramiro","💼","Motivación","Un empresario mexicano exitoso, directo y chistoso, que da consejos prácticos para ganar dinero."],["🕵️ Misterio","Inspectora Vega","🕵️","Aventura","Una detective que plantea un caso por capítulos; el usuario investiga y decide, y al final se revela al culpable."],["🤖 Robot gracioso","Bip-0","🤖","Amigos","Un robot que no entiende las costumbres humanas y pregunta todo con mucha curiosidad y humor."],["👻 Historia de terror","El Velador","👻","Terror","Un velador de un panteón que cuenta leyendas de terror por capítulos, con suspenso y opciones."],["📚 Tutor de tareas","Profe Lalo","📚","Practicar","Un maestro paciente que explica paso a paso sin hacer la tarea por el usuario y le pone ejercicios."]];
+$("#crPlant").innerHTML = "<small class=\"nota\">¿Sin ideas? Toca una plantilla:</small>" + PLANT.map((x, i) => `<button type="button" data-i="${i}">${x[0]}</button>`).join("");
+$("#crPlant").querySelectorAll("button").forEach(b => b.onclick = () => { const x = PLANT[b.dataset.i]; $("#crNom").value = x[1]; $("#crEmo").value = x[2]; $("#crCat").value = x[3]; $("#crPerso").value = x[4]; $("#crDesc").value = x[4].split(",")[0].slice(0, 110); });
+$("#bLetra").onclick = () => { const v = !ls.get("ch_letra", false); ls.set("ch_letra", v); prefs(); toast(v ? "Letra grande" : "Letra normal"); };
 $("#crCancel").onclick = () => cerrar("#mCrear");
 $("#crProbar").onclick = () => hablar($("#crSal").value || "Hola, así va a sonar mi voz.", true, { voz: { tono: +$("#crTono").value, vel: +$("#crVel").value } });
 $("#crFoto").onchange = async () => {
