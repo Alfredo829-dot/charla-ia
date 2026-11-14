@@ -450,9 +450,9 @@ $("#ajGuard").onclick = () => {
   abrir("#mGuard");
 };
 $("#guCerrar").onclick = () => cerrar("#mGuard");
-$$(".plusLink").forEach(e => e.href = wa("Hola, quiero Charla Plus"));
+$$(".plusLink").forEach(e => e.href = wa("Hola, quiero Charla Plus (primer mes a $49)"));
 $$(".precioPlus").forEach(e => e.textContent = C.precioPlus || "");
-$("#pgLink").href = wa("Hola, quiero Charla Plus");
+$("#pgLink").href = wa("Hola, quiero Charla Plus (primer mes a $49)");
 $("#pgCerrar").onclick = () => cerrar("#mPago");
 $("#lnkReporte").href = wa("Hola, quiero reportar algo en Charla:");
 $$(".modal").forEach(m => m.onclick = e => { if (e.target === m) m.classList.add("oculto"); });
