@@ -69,3 +69,4 @@ body.claro{background:#000;color:#fff}body.claro .m.ia{background:#000;border:2p
 @media(max-width:420px){.cbar .ic{min-width:32px;font-size:15px}.cbar .av{width:38px;height:38px}}
 .plantillas{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}.plantillas small{width:100%}.plantillas button{background:#ffffff10;border:1px solid #ffffff1f;color:inherit;border-radius:999px;padding:5px 10px;font:inherit;font-size:13px;cursor:pointer}#bLetra{font-weight:800;font-size:15px}
 .precio{margin:4px 0 10px}.precio s{color:#8b8ba3}.precio b{font-size:22px;color:#fbbf24}.precio small{color:#a1a1b5}
+.pasos.como{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:12px 0 4px}.pasos.como b{font-size:15px;color:#ececf4;margin-bottom:4px}
