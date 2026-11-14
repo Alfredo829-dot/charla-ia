@@ -48,3 +48,8 @@ h2{font-size:18px;margin:22px 0 10px}
 .cuenta{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#ffffff08;border-radius:12px;padding:8px 10px;margin-bottom:10px;font-size:13px}
 .fila3{display:flex;gap:8px;margin-top:4px}.fila3 input{margin-top:0!important}
 details{margin-bottom:10px}summary{cursor:pointer}
+
+.planes{margin-top:34px}.planes .sub{color:#a1a1b5;margin:-4px 0 14px}.pl{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;align-items:center}
+.plan{background:#13131c;border:1px solid #ffffff1a;border-radius:20px;padding:18px;display:flex;flex-direction:column}.plan h3{margin:0 0 8px;display:flex;justify-content:space-between}
+.plan ul{margin:0 0 14px;padding-left:18px;color:#c9c9d8;font-size:14px}.plan li{margin-bottom:5px}
+.plan.top{border-color:#ec4899;transform:scale(1.04);box-shadow:0 0 30px #ec489955,0 0 60px #8b5cf633}

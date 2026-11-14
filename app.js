@@ -237,6 +237,7 @@ function abrirAjustes() {
 $("#bAjustes").onclick = abrirAjustes;
 $("#ajOk").onclick = () => { ls.set("ch_nombre", $("#ajNom").value.trim()); ls.set("ch_key", $("#ajKey").value.trim()); ls.set("ch_rom", esPlus() && $("#ajRom").checked); voz = $("#ajVoz").checked; ls.set("ch_voz", voz); pintarVoz(); cerrar("#mAjustes"); };
 $("#ajBorrar").onclick = () => { if (confirm("¿Borrar todos tus chats y personajes?")) { Object.keys(localStorage).filter(k => k.startsWith("ch_chat_") || k === "ch_propios" || k === "ch_rec").forEach(k => localStorage.removeItem(k)); cerrar("#mAjustes"); location.hash = ""; pintar(); } };
+document.querySelectorAll(".plusLink").forEach(e => e.href = C.linkPago || `https://wa.me/${C.contactoWhatsApp}?text=${encodeURIComponent("Hola, quiero Charla Plus")}`);
 $("#pgLink").href = C.linkPago || `https://wa.me/${C.contactoWhatsApp}?text=${encodeURIComponent("Hola, quiero Charla Plus")}`;
 $("#pgCerrar").onclick = () => cerrar("#mPago");
 document.querySelectorAll(".modal").forEach(m => m.onclick = e => { if (e.target === m) m.classList.add("oculto"); });
