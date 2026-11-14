@@ -194,7 +194,8 @@ $("#crOk").onclick = () => {
   const todo = [nombre, perso, desc, $("#crSal").value].join(" ");
   if (!nombre || perso.length < 20) return $("#crErr").textContent = "Ponle nombre y al menos una o dos frases de personalidad.";
   if (PROHIBIDO.test(todo)) return $("#crErr").textContent = "Charla es para todo público: sin contenido sexual ni nada con menores.";
-  if (propios().length >= 30) return $("#crErr").textContent = "Llegaste al máximo de 30 personajes propios.";
+  const tope = esPlus() ? 50 : 10;
+  if (propios().length >= tope) return $("#crErr").textContent = esPlus() ? "Llegaste al máximo de 50 personajes." : "En gratis puedes tener 10 personajes; con Plus, hasta 50.";
   const p = { id: "u" + Date.now().toString(36), propio: true, fan: $("#crFan").checked, nombre, emoji: $("#crEmo").value.trim() || "✨", cat: $("#crCat").value,
     desc: desc || "Creado por ti", saludo: $("#crSal").value.trim() || `¡Hola! Soy ${nombre}. ¿De qué platicamos?`, perso: `Eres ${nombre}. ${perso}`,
     colores: COLORES[Math.floor(Math.random() * COLORES.length)], voz: { tono: +$("#crTono").value, vel: +$("#crVel").value } };
