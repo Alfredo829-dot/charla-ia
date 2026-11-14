@@ -7,7 +7,8 @@ const propios = () => ls.get("ch_propios", []);
 const todos = () => [...CH_BASE, ...propios()];
 const buscarP = id => todos().find(p => p.id === id);
 const grad = p => `linear-gradient(160deg,${p.colores[0]},${p.colores[1]})`;
-const fotoDe = p => p.foto || (CH_BASE.some(b => b.id === p.id) ? `img/${p.id}.jpg` : "");
+const CON_FOTO = ["rey","luz","toro","leo","sam","dani","chela","nova","calma","sorjuana","juarez","rojas"];
+const fotoDe = p => p.foto || (CON_FOTO.includes(p.id) ? `img/${p.id}.jpg` : "");
 const avatar = p => fotoDe(p) ? `<img src="${fotoDe(p)}" alt="">` : esc(p.emoji);
 const esPlus = () => ls.get("ch_plus", false);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -21,7 +22,7 @@ function pintarCats() {
 }
 function card(p) {
   const f = fotoDe(p);
-  return `<div class="card${f ? " foto" : ""}" data-id="${p.id}" style="background:${f ? `url(${f}),` : ""}${grad(p)}"><span class="tag">${esc(p.fan ? "De fans" : p.cat)}</span>${f ? "" : `<span class="em">${esc(p.emoji)}</span>`}<b>${esc(p.nombre)}</b><p>${esc(p.desc)}</p></div>`;
+  return `<div class="card${f ? " foto" : ""}" data-id="${p.id}" style="background:${f ? `url(${f}),` : ""}${grad(p)}"><span class="tag">${esc(p.fan && p.propio ? "De fans" : p.cat)}</span>${f ? "" : `<span class="em">${esc(p.emoji)}</span>`}<b>${esc(p.nombre)}</b><p>${esc(p.desc)}</p></div>`;
 }
 function pintar() {
   const q = $("#q").value.trim().toLowerCase();
@@ -65,7 +66,8 @@ function pintarMsgs() {
 function sistema(p, d) {
   const yo = ls.get("ch_nombre", "");
   let s = CH_REGLAS + "\n\n" + p.perso;
-  if (p.fan) s += `\nEres una interpretación hecha por fans, inspirada en una persona real; NO eres esa persona. Habla de su trayectoria pública conocida en tono positivo, no inventes declaraciones polémicas, noticias, ni datos privados, y si te preguntan, aclara que eres un personaje de IA hecho por fans.`;
+  if (p.fan && !p.propio) s += `\nEres una interpretación de fan de un personaje ficticio famoso: mantén su personalidad, frases y mundo con fidelidad, siempre adulto y apto para todo público.`;
+  else if (p.fan) s += `\nEres una interpretación hecha por fans, inspirada en una persona real; NO eres esa persona. Habla de su trayectoria pública conocida en tono positivo, no inventes declaraciones polémicas, noticias, ni datos privados, y si te preguntan, aclara que eres un personaje de IA hecho por fans.`;
   if (yo) s += `\nEl usuario se llama ${yo}.`;
   if (esPlus()) s += `\nModo Plus: puedes dar respuestas más largas, profundas y creativas cuando la plática lo pida, con más personalidad y menos formalidad.`;
   if (esPlus() && ls.get("ch_rom", false)) s += `\nModo romance activado por un usuario adulto: si el usuario lo busca, puedes coquetear, echar piropos, ser romántico, celoso de broma y cariñoso, con tensión y química. Nunca describas actos sexuales, desnudos ni partes íntimas; si te lo piden, lo esquivas con coquetería y cambias de tema.`;
