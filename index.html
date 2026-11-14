@@ -1,7 +1,7 @@
 <!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Charla · Platica con personajes de IA</title><meta name="description" content="Platica con personajes de IA que te hablan, te recuerdan y te motivan. Crea los tuyos y compártelos.">
-<meta name="theme-color" content="#0b0b12"><link rel="stylesheet" href="styles.css"></head><body>
-<header class="top"><a class="logo" href="#">💬 <b>Charla</b></a><div class="acc"><button id="bAjustes" class="ic" title="Ajustes">⚙️</button></div></header>
+<meta name="theme-color" content="#0b0b12"><link rel="icon" href="img/icon.png"><link rel="apple-touch-icon" href="img/icon-180.png"><link rel="manifest" href="manifest.json"><link rel="stylesheet" href="styles.css"></head><body>
+<header class="top"><a class="logo" href="#"><img src="img/icon.png" alt=""> <b>Charla</b></a><div class="acc"><span id="racha" class="racha oculto"></span><span id="plusTag" class="plus oculto">PLUS</span><button id="bAjustes" class="ic" title="Ajustes">⚙️</button></div></header>
 <main id="vInicio">
   <section class="hero"><h1>Platica con quien quieras.<br><span>Te habla, te recuerda, te impulsa.</span></h1>
   <p>Raperos, cantantes, coaches, abuelitas sabias, figuras de la historia y los que tú inventes. Todos son personajes de IA.</p>
@@ -31,13 +31,17 @@
   <div class="bots"><button id="crProbar" class="btn sec" type="button">🔊 Probar voz</button><button id="crCancel" class="btn sec" type="button">Cancelar</button><button id="crOk" class="btn" type="button">Crear y platicar</button></div></div></div>
 <div id="mAjustes" class="modal oculto"><div class="caja"><h3>Ajustes</h3>
   <label>Tu nombre (para que te llamen así)<input id="ajNom" maxlength="30"></label>
-  <label>Clave de Groq (opcional, gratis en console.groq.com)<input id="ajKey" type="password" autocomplete="off" placeholder="gsk_…"></label>
+  <div class="cuenta"><span id="ajCuenta">Sin cuenta</span><button id="ajEntrar" class="btn sec" type="button">Entrar con tu correo</button></div>
+  <label>Código de Charla Plus<span class="fila3"><input id="ajCod" placeholder="CH-XXXXXX-XXXX" autocomplete="off"><button id="ajActivar" class="btn sec" type="button">Activar</button></span></label>
+  <label class="chk" id="ajRomWrap"><input id="ajRom" type="checkbox"> Modo romance (solo Plus): soy mayor de 18 y acepto que los personajes coqueteen. Nunca es contenido sexual.</label>
+  <details><summary class="nota">Avanzado</summary><label>Clave propia de Groq (opcional)<input id="ajKey" type="password" autocomplete="off" placeholder="gsk_…"></label></details>
   <label class="chk"><input id="ajVoz" type="checkbox"> Leer en voz alta las respuestas</label>
   <p class="nota" id="ajCont"></p>
   <div class="bots"><button id="ajBorrar" class="btn sec peligro" type="button">Borrar mis chats</button><button id="ajOk" class="btn" type="button">Listo</button></div></div></div>
 <div id="mMas" class="modal oculto"><div class="caja"><h3 id="mmTit">Opciones</h3>
   <div class="bots col"><button id="mmReset" class="btn sec" type="button">Empezar plática de nuevo</button><button id="mmBorrarP" class="btn sec peligro oculto" type="button">Borrar este personaje</button><button id="mmCerrar" class="btn" type="button">Cerrar</button></div></div></div>
-<div id="mPago" class="modal oculto"><div class="caja"><h3>Se acabaron los mensajes gratis de hoy</h3><p>Mañana se recargan. Si quieres platicar sin límite, pásate a Charla Plus.</p>
+<div id="mEntrar" class="modal oculto"><div class="caja"><h3>Entra con tu correo para platicar</h3><p>Charla usa Puter para darte la IA. Creas tu cuenta gratis con tu correo una sola vez y tus personajes ya te contestan.</p><div class="bots col"><button id="enOk" class="btn" type="button">Entrar con mi correo</button><button id="enNo" class="btn sec" type="button">Ahorita no</button></div></div></div>
+<div id="mPago" class="modal oculto"><div class="caja"><h3>Se acabaron los mensajes gratis de hoy</h3><p>Mañana se recargan. Con Charla Plus tienes mensajes ilimitados, una IA más lista que se acuerda mejor de ti, y el modo romance para mayores de 18.</p>
   <div class="bots col"><a id="pgLink" class="btn" target="_blank" rel="noopener">Quiero Charla Plus</a><button id="pgCerrar" class="btn sec" type="button">Ahorita no</button></div></div></div>
 <div id="toast" class="toast oculto"></div>
-<script src="config.js"></script><script src="personajes.js"></script><script src="app.js"></script></body></html>
+<script src="https://js.puter.com/v2/"></script><script src="config.js"></script><script src="personajes.js"></script><script src="app.js"></script></body></html>

@@ -40,3 +40,11 @@ h2{font-size:18px;margin:22px 0 10px}
 .bots{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}.bots.col{flex-direction:column}
 .err{color:#fca5a5;font-size:13px;min-height:1em;margin:4px 0}.nota{color:#8b8ba3;font-size:12px}
 .toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#ececf4;color:#0b0b12;padding:9px 16px;border-radius:999px;z-index:30;font-size:14px}
+
+.logo{display:flex;align-items:center;gap:8px}.logo img{width:30px;height:30px;border-radius:8px}.acc{display:flex;align-items:center;gap:8px}
+.racha{font-size:14px;background:#f59e0b22;color:#fbbf24;padding:4px 10px;border-radius:999px}.plus{font-size:11px;font-weight:800;background:linear-gradient(135deg,#fbbf24,#ec4899);color:#0b0b12;padding:4px 8px;border-radius:999px}
+.card.foto{background-size:cover!important;background-position:center top!important;min-height:230px}.card.foto::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,#000d)}.card.foto>*{position:relative}.card.foto .tag{position:absolute}
+.av img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.cuenta{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#ffffff08;border-radius:12px;padding:8px 10px;margin-bottom:10px;font-size:13px}
+.fila3{display:flex;gap:8px;margin-top:4px}.fila3 input{margin-top:0!important}
+details{margin-bottom:10px}summary{cursor:pointer}

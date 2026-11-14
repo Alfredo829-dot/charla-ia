@@ -7,6 +7,9 @@ const propios = () => ls.get("ch_propios", []);
 const todos = () => [...CH_BASE, ...propios()];
 const buscarP = id => todos().find(p => p.id === id);
 const grad = p => `linear-gradient(160deg,${p.colores[0]},${p.colores[1]})`;
+const fotoDe = p => p.foto || (CH_BASE.some(b => b.id === p.id) ? `img/${p.id}.jpg` : "");
+const avatar = p => fotoDe(p) ? `<img src="${fotoDe(p)}" alt="">` : esc(p.emoji);
+const esPlus = () => ls.get("ch_plus", false);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const toast = t => { const e = $("#toast"); e.textContent = t; e.classList.remove("oculto"); clearTimeout(toast.t); toast.t = setTimeout(() => e.classList.add("oculto"), 2200); };
 const abrir = id => $(id).classList.remove("oculto"), cerrar = id => $(id).classList.add("oculto");
@@ -17,7 +20,8 @@ function pintarCats() {
   [...$("#cats").children].forEach(b => b.onclick = () => { cat = b.textContent; pintarCats(); pintar(); });
 }
 function card(p) {
-  return `<div class="card" data-id="${p.id}" style="background:${grad(p)}"><span class="tag">${esc(p.fan ? "De fans" : p.cat)}</span><span class="em">${esc(p.emoji)}</span><b>${esc(p.nombre)}</b><p>${esc(p.desc)}</p></div>`;
+  const f = fotoDe(p);
+  return `<div class="card${f ? " foto" : ""}" data-id="${p.id}" style="background:${f ? `url(${f}),` : ""}${grad(p)}"><span class="tag">${esc(p.fan ? "De fans" : p.cat)}</span>${f ? "" : `<span class="em">${esc(p.emoji)}</span>`}<b>${esc(p.nombre)}</b><p>${esc(p.desc)}</p></div>`;
 }
 function pintar() {
   const q = $("#q").value.trim().toLowerCase();
@@ -28,7 +32,7 @@ function pintar() {
   $("#cNueva").onclick = () => abrirCrear(q && !l.length ? $("#q").value.trim() : "");
   const rec = ls.get("ch_rec", []).map(buscarP).filter(Boolean);
   $("#recientes").classList.toggle("oculto", !rec.length);
-  $("#lRec").innerHTML = rec.map(p => `<div class="r" data-id="${p.id}"><div class="av" style="background:${grad(p)}">${esc(p.emoji)}</div>${esc(p.nombre)}</div>`).join("");
+  $("#lRec").innerHTML = rec.map(p => `<div class="r" data-id="${p.id}"><div class="av" style="background:${grad(p)}">${avatar(p)}</div>${esc(p.nombre)}</div>`).join("");
   $("#lRec").querySelectorAll(".r").forEach(c => c.onclick = () => location.hash = "p=" + c.dataset.id);
 }
 $("#q").oninput = pintar;
@@ -40,7 +44,7 @@ function guardar(p, d) { ls.set(clave(p.id), d); }
 function abrirChat(p) {
   actual = p;
   $("#vInicio").classList.add("oculto"); $("#vChat").classList.remove("oculto");
-  $("#cAv").style.background = grad(p); $("#cAv").textContent = p.emoji; $("#cNom").textContent = p.nombre;
+  $("#cAv").style.background = grad(p); $("#cAv").innerHTML = avatar(p); $("#cNom").textContent = p.nombre;
   $("#cSub").textContent = p.fan ? "personaje de fan · IA" : "personaje de IA";
   $("#fan").classList.toggle("oculto", !p.fan);
   $("#mmBorrarP").classList.toggle("oculto", !p.propio);
@@ -63,6 +67,8 @@ function sistema(p, d) {
   let s = CH_REGLAS + "\n\n" + p.perso;
   if (p.fan) s += `\nEres una interpretación hecha por fans, inspirada en una persona real; NO eres esa persona. Habla de su trayectoria pública conocida en tono positivo, no inventes declaraciones polémicas, noticias, ni datos privados, y si te preguntan, aclara que eres un personaje de IA hecho por fans.`;
   if (yo) s += `\nEl usuario se llama ${yo}.`;
+  if (esPlus()) s += `\nModo Plus: puedes dar respuestas más largas, profundas y creativas cuando la plática lo pida, con más personalidad y menos formalidad.`;
+  if (esPlus() && ls.get("ch_rom", false)) s += `\nModo romance activado por un usuario adulto: si el usuario lo busca, puedes coquetear, echar piropos, ser romántico, celoso de broma y cariñoso, con tensión y química. Nunca describas actos sexuales, desnudos ni partes íntimas; si te lo piden, lo esquivas con coquetería y cambias de tema.`;
   if (d.resumen) s += `\nLo que recuerdas de pláticas anteriores con este usuario: ${d.resumen}`;
   return s;
 }
@@ -72,14 +78,22 @@ async function llamarIA(mensajes) {
     if (!r.ok) throw new Error("proxy " + r.status); return (await r.json()).texto;
   }
   const k = ls.get("ch_key", "");
-  if (!k) throw new Error("sinclave");
+  if (!k) {
+    if (!window.puter) throw new Error("sinputer");
+    if (!puter.auth.isSignedIn()) throw new Error("sincuenta");
+    const r = await puter.ai.chat(mensajes, { model: esPlus() ? C.modeloPlus : C.modeloGratis, temperature: 0.9, max_tokens: esPlus() ? 500 : 260 });
+    const c = r?.message?.content;
+    const t = Array.isArray(c) ? c.filter(x => x.type === "text").map(x => x.text).join("") : (c ?? String(r));
+    if (!t.trim()) throw new Error("vacio"); return t.trim();
+  }
   const r = await fetch("https://api.groq.com/openai/v1/chat/completions", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + k },
     body: JSON.stringify({ model: "llama-3.3-70b-versatile", messages: mensajes, temperature: 0.9, max_tokens: 260 }) });
   if (!r.ok) throw new Error("groq " + r.status);
   return (await r.json()).choices[0].message.content.trim();
 }
 function cupo() {
-  if (ls.get("ch_plus", false)) return true;
+  marcarRacha();
+  if (esPlus()) return true;
   const hoy = new Date().toDateString(), c = ls.get("ch_cupo", { d: hoy, n: 0 });
   if (c.d !== hoy) { c.d = hoy; c.n = 0; }
   if (c.n >= C.mensajesGratisDia) return false;
@@ -96,7 +110,8 @@ async function responder() {
     if (d.msgs.length % 8 === 0) resumir(p, d);
   } catch (err) {
     e.remove();
-    if (err.message === "sinclave") { toast("Pon tu clave gratis de Groq en Ajustes"); abrirAjustes(); }
+    if (err.message === "sincuenta") abrir("#mEntrar");
+    else if (err.message === "sinputer") toast("No cargó la IA, revisa tu internet");
     else toast("No pude responder, intenta otra vez");
   }
 }
@@ -111,6 +126,34 @@ $("#fChat").onsubmit = ev => {
   ev.preventDefault(); const t = $("#txt").value.trim(); if (!t || !actual) return;
   if (!cupo()) { abrir("#mPago"); return; }
   const d = cargar(actual); d.msgs.push({ r: "user", t }); guardar(actual, d); $("#txt").value = ""; pintarMsgs(); responder();
+};
+
+// ---------- racha / cuenta / plus ----------
+function marcarRacha() {
+  const hoy = new Date().toDateString(), ayer = new Date(Date.now() - 864e5).toDateString(), r = ls.get("ch_racha", { d: "", n: 0 });
+  if (r.d !== hoy) { r.n = r.d === ayer ? r.n + 1 : 1; r.d = hoy; ls.set("ch_racha", r); if (r.n > 1) toast(`🔥 ${r.n} días seguidos platicando`); }
+  pintarTop();
+}
+function pintarTop() {
+  const r = ls.get("ch_racha", { d: "", n: 0 }), viva = r.d === new Date().toDateString() || r.d === new Date(Date.now() - 864e5).toDateString();
+  $("#racha").textContent = "🔥 " + r.n; $("#racha").classList.toggle("oculto", !viva || r.n < 1);
+  $("#plusTag").classList.toggle("oculto", !esPlus());
+}
+async function entrar() {
+  try { await puter.auth.signIn(); toast("Listo, ya puedes platicar"); return true; } catch { toast("No se completó el registro"); return false; }
+}
+async function pintarCuenta() {
+  try { if (window.puter && puter.auth.isSignedIn()) { const u = await puter.auth.getUser(); $("#ajCuenta").textContent = "Entraste como " + (u.username || "usuario"); $("#ajEntrar").textContent = "Salir"; return; } } catch {}
+  $("#ajCuenta").textContent = "Sin cuenta"; $("#ajEntrar").textContent = "Entrar con tu correo";
+}
+$("#ajEntrar").onclick = async () => { if (window.puter && puter.auth.isSignedIn()) puter.auth.signOut(); else await entrar(); pintarCuenta(); };
+$("#enNo").onclick = () => cerrar("#mEntrar");
+$("#enOk").onclick = async () => { cerrar("#mEntrar"); if (await entrar() && actual) { const d = cargar(actual); if (d.msgs.at(-1)?.r === "user") responder(); } };
+const sha = async t => [...new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(t)))].map(b => b.toString(16).padStart(2, "0")).join("");
+$("#ajActivar").onclick = async () => {
+  const c = $("#ajCod").value.trim().toUpperCase(); if (!c) return;
+  if ((C.codigosPlus || []).includes(await sha(c))) { ls.set("ch_plus", true); ls.set("ch_plus_cod", c); toast("¡Charla Plus activado!"); abrirAjustes(); pintarTop(); }
+  else toast("Ese código no es válido");
 };
 
 // ---------- voz ----------
@@ -184,13 +227,14 @@ $("#mmCerrar").onclick = () => cerrar("#mMas");
 $("#mmReset").onclick = () => { if (confirm("¿Borrar esta plática y lo que recuerda de ti?")) { localStorage.removeItem(clave(actual.id)); pintarMsgs(); cerrar("#mMas"); } };
 $("#mmBorrarP").onclick = () => { if (confirm("¿Borrar a " + actual.nombre + "?")) { ls.set("ch_propios", propios().filter(p => p.id !== actual.id)); localStorage.removeItem(clave(actual.id)); cerrar("#mMas"); location.hash = ""; } };
 function abrirAjustes() {
+  pintarCuenta(); $("#ajRom").checked = ls.get("ch_rom", false); $("#ajRom").disabled = !esPlus(); $("#ajRomWrap").style.opacity = esPlus() ? 1 : .5;
   $("#ajNom").value = ls.get("ch_nombre", ""); $("#ajKey").value = ls.get("ch_key", ""); $("#ajVoz").checked = voz;
   const c = ls.get("ch_cupo", { d: "", n: 0 });
-  $("#ajCont").textContent = ls.get("ch_plus", false) ? "Tienes Charla Plus." : `Mensajes gratis hoy: ${c.d === new Date().toDateString() ? c.n : 0} de ${C.mensajesGratisDia}.` + (C.proxyUrl ? "" : " Sin clave de Groq no hay respuestas; la clave se queda solo en tu celular.");
+  $("#ajCont").textContent = esPlus() ? "Tienes Charla Plus: mensajes ilimitados y la IA más lista." : `Mensajes gratis hoy: ${c.d === new Date().toDateString() ? c.n : 0} de ${C.mensajesGratisDia}.` + " Con Plus son ilimitados.";
   abrir("#mAjustes");
 }
 $("#bAjustes").onclick = abrirAjustes;
-$("#ajOk").onclick = () => { ls.set("ch_nombre", $("#ajNom").value.trim()); ls.set("ch_key", $("#ajKey").value.trim()); voz = $("#ajVoz").checked; ls.set("ch_voz", voz); pintarVoz(); cerrar("#mAjustes"); };
+$("#ajOk").onclick = () => { ls.set("ch_nombre", $("#ajNom").value.trim()); ls.set("ch_key", $("#ajKey").value.trim()); ls.set("ch_rom", esPlus() && $("#ajRom").checked); voz = $("#ajVoz").checked; ls.set("ch_voz", voz); pintarVoz(); cerrar("#mAjustes"); };
 $("#ajBorrar").onclick = () => { if (confirm("¿Borrar todos tus chats y personajes?")) { Object.keys(localStorage).filter(k => k.startsWith("ch_chat_") || k === "ch_propios" || k === "ch_rec").forEach(k => localStorage.removeItem(k)); cerrar("#mAjustes"); location.hash = ""; pintar(); } };
 $("#pgLink").href = C.linkPago || `https://wa.me/${C.contactoWhatsApp}?text=${encodeURIComponent("Hola, quiero Charla Plus")}`;
 $("#pgCerrar").onclick = () => cerrar("#mPago");
@@ -206,5 +250,5 @@ function ruta() {
   actual = null; speechSynthesis?.cancel(); document.title = "Charla · Platica con personajes de IA";
   $("#vChat").classList.add("oculto"); $("#vInicio").classList.remove("oculto"); pintarCats(); pintar();
 }
-window.onhashchange = ruta; pintarVoz(); ruta();
+window.onhashchange = ruta; pintarVoz(); pintarTop(); ruta();
 })();
